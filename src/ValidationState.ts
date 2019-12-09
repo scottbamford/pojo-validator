@@ -15,8 +15,13 @@ export class ValidationState {
      * @param condition
      * @param errorMessage
      */
-    check(field: string, condition: () => boolean, errorMessage: string) {
-        if (condition()) {
+    check(field: string, condition: boolean | (() => boolean), errorMessage: string) {
+        let failed = condition;
+        if (typeof condition === 'function') {
+            failed = condition();
+        }
+
+        if (failed) {
             this.addError(field, errorMessage);
         }
     }
@@ -37,7 +42,7 @@ export class ValidationState {
      * @param condition
      * @param errorMessage
      */
-    singleCheck(field: string, condition: () => boolean, errorMessage: string) {
+    singleCheck(field: string, condition: boolean | (() => boolean), errorMessage: string) {
         this.clearErrors(field);
         this.check(field, condition, errorMessage);
     }
