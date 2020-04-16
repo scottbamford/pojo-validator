@@ -59,6 +59,25 @@ export class ValidationState {
     }
 
     /**
+     * Check rules specified in the rules dictionary of functions 
+     * @param rules
+     * @param fieldsToCheck
+     */
+    checkRules(rules: { [id: string]: () => string | undefined | null }, fieldsToCheck?: Array<string>) {
+        for (let field in rules) {
+            if (!fieldsToCheck || fieldsToCheck.find(item => item === field)) {
+                // Do the check
+                let rule = rules[field];
+                let errorMessage = rule();
+                this.clearErrors(field);
+                if (errorMessage) {
+                    this.addError(field, errorMessage);
+                }
+            }
+        }
+    }
+
+    /**
      * Returns the errors found by the validator.
      */
     errors(): ValidationErrors {
