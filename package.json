@@ -1,6 +1,6 @@
 {
   "name": "pojo-validator",
-  "version": "2.1.0",
+  "version": "2.2.1",
   "description": "Lightweight validation framework using for any models that are plain-old javascript objects (pojo)",
   "main": "dist/lib/commonjs/index.js",
   "module": "dist/lib/esm/index.js",

@@ -31,9 +31,7 @@ export class ValidationState {
      * @param field
      */
     clearErrors(field: string) {
-        if (this._errors[field] == null) {
-            this._errors[field] = new Array<string>();
-        }
+        this._errors[field] = new Array<string>();
     }
 
     /**
